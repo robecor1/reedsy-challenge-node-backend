@@ -1,7 +1,7 @@
 {
-  "name": "candidate-sse-take-home-challenge-292",
+  "name": "reedsy-challenge-node-backend",
   "version": "1.0.0",
-  "description": "The context for this challenge is the following: You work at a company that powers a marketplace app for healthcare facilities to hire healthcare professionals (a.k.a. workers).",
+  "description": "Implement a REST API using Express.js that handles Export and Import requests",
   "main": "index.js",
   "scripts": {
     "start": "npx tsc && node build/index.js",
@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Clipboard-recruiting/candidate-sse-take-home-challenge-292.git"
+    "url": "git+https://github.com/robecor1/reedsy-challenge-node-backend.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Clipboard-recruiting/candidate-sse-take-home-challenge-292/issues"
+    "url": "https://github.com/robecor1/reedsy-challenge-node-backend/issues"
   },
-  "homepage": "https://github.com/Clipboard-recruiting/candidate-sse-take-home-challenge-292#readme",
+  "homepage": "https://github.com/robecor1/reedsy-challenge-node-backend#readme",
   "devDependencies": {
     "@types/express": "^4.17.17",
     "@types/jest": "^29.5.1",
