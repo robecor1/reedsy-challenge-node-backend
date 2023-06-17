@@ -3,7 +3,7 @@ import {PostExportBody} from "../../controllers/export/@types";
 
 
 describe("Post export body validator", () => {
-  test('Missing bookId error', () => {
+  test('Missing "bookId" error', () => {
     // Empty body since "bookId" is the first checked field
     const VALIDATION_BODY = {}
 
@@ -13,8 +13,7 @@ describe("Post export body validator", () => {
     expect(testFunction).toThrow('Missing "bookId" field')
   })
 
-  test('Missing bookId error', () => {
-    // Empty body since "bookId" is the first checked field
+  test('"bookId" field type error', () => {
     const VALIDATION_BODY = {
       bookId: 1
     }
@@ -25,10 +24,9 @@ describe("Post export body validator", () => {
     expect(testFunction).toThrow('"bookId" field should be of type string')
   })
 
-  test('Missing bookId error', () => {
-    // Empty body since "bookId" is the first checked field
+  test('Missing "type" error', () => {
     const VALIDATION_BODY = {
-      bookId: "1"
+      bookId: '1'
     }
 
     // Conversion for the sake of testing
@@ -37,10 +35,9 @@ describe("Post export body validator", () => {
     expect(testFunction).toThrow('Missing "type" field')
   })
 
-  test('Missing bookId error', () => {
-    // Empty body since "bookId" is the first checked field
+  test('"type" field type error', () => {
     const VALIDATION_BODY = {
-      bookId: "1",
+      bookId: '1',
       type: '1'
     }
 
@@ -50,10 +47,9 @@ describe("Post export body validator", () => {
     expect(testFunction).toThrow(`"type" field should be one of the following values: \n ${TYPE_VALUES.join('\n')}`)
   })
 
-  test('Missing bookId error', () => {
-    // Empty body since "bookId" is the first checked field
+  test('Valid body', () => {
     const VALIDATION_BODY = {
-      bookId: "1",
+      bookId: '1',
       type: 'pdf'
     }
 

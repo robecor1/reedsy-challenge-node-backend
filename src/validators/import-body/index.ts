@@ -3,7 +3,7 @@ import {CustomError} from "../../utils/error";
 import {isValidUrl} from "../url";
 
 // Make sure this match the type field in the PostExportBody type
-const TYPE_VALUES = [
+export const TYPE_VALUES = [
   'word',
   'pdf',
   'wattpad',
@@ -38,4 +38,6 @@ export const validateImportBody = (body: PostImportBody) => {
   if (!isValidUrl(body.url)) {
     throw new CustomError('"url" field is not a valid URL string')
   }
+
+  return true
 }
