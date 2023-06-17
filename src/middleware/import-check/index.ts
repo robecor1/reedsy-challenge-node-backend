@@ -7,7 +7,7 @@ export const checkImportBody = (req: Request, res: Response, next: NextFunction)
     validateImportBody(req.body)
     next()
   } catch (error) {
-    logError(`Export body check error: ${error.message}`)
+    logError(`Import body check error: ${error.message}`)
     // Since the error messages defined in the validator are for the client we can return the message directly
     res.status(400).send(error.message)
   }
