@@ -2,7 +2,7 @@ import {NextFunction, Request, Response} from "express";
 import {validateImportBody} from "../../validators/import-body";
 import {logError} from "../../utils/logging";
 
-export const checkImportBody = (req: Request, res: Response, next: NextFunction) => {
+export const checkImportBody = async (req: Request, res: Response, next: NextFunction) => {
   try {
     validateImportBody(req.body)
     next()
