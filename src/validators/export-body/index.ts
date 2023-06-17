@@ -2,7 +2,7 @@ import {PostExportBody} from "../../controllers/export/@types";
 import {CustomError} from "../../utils/error";
 
 // Make sure this match the type field in the PostExportBody type
-const TYPE_VALUES = [
+export const TYPE_VALUES = [
   'epub',
   'pdf'
 ]
@@ -23,4 +23,6 @@ export const validateExportBody = (body: PostExportBody) => {
   if (!TYPE_VALUES.includes(body.type)) {
     throw new CustomError(`"type" field should be one of the following values: \n ${TYPE_VALUES.join('\n')}`)
   }
+
+  return true
 }
