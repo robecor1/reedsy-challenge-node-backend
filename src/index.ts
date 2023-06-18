@@ -5,7 +5,9 @@ import swaggerDocs from "./config/swagger";
 import {exportRoute} from "./routes/export";
 import {importRoute} from "./routes/import";
 import bodyParser from "body-parser";
-
+import {logError, logInfo} from "./utils/logging";
+import {getServerUri, startMongoServer} from "./adaptors/memory-mongo";
+import {connectToMongoDb} from "./adaptors/mongoose";
 
 const app = getExpressApp();
 
@@ -19,7 +21,25 @@ app.use('/export', exportRoute)
 app.use('/import', importRoute)
 
 
-app.listen(SERVER_CONFIG.port, () => {
+app.listen(SERVER_CONFIG.port, async () => {
   //TODO: Add server start handler
-  console.log("Reedsy app")
+  logInfo("Express for Reedsy assignment started")
+
+  // Start the in memory mongoDB
+  // For the first time it may need to download
+  // Note: We only use this for assignment development only. It should never be used in production situations
+  try {
+    await startMongoServer()
+    logInfo('In memory mongoDB started')
+
+    // If the mongoDB started connect to it
+    const dbUri = getServerUri()
+    //TODO: Remove
+    console.log(dbUri);
+    await connectToMongoDb(dbUri)
+    logInfo('Connected to db')
+
+  } catch (error) {
+    logError(`MongoDB start and connect error : ${error.message}`)
+  }
 })
