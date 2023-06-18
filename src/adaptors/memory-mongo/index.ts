@@ -16,3 +16,7 @@ export const startMongoServer = async () => {
 export const getServerUri = () => {
   return server && server.getUri()
 }
+
+export const stopServer = () => {
+  server && server.stop()
+}

@@ -8,7 +8,7 @@ import {MONGO_COLLECTIONS} from "../../enums/mongo";
 
 export const createJob = async (data: PostImportBody & PostExportBody, type: JobType) => {
   const newJob: Job = {
-    bookID: data.bookId,
+    bookId: data.bookId,
     type: data.type,
     url: data?.url,
     jobType: type,
@@ -16,7 +16,7 @@ export const createJob = async (data: PostImportBody & PostExportBody, type: Job
     created_at: Date.now()
   }
 
-  await createDocument(MONGO_COLLECTIONS.JOBS, newJob)
+  return await createDocument(MONGO_COLLECTIONS.JOBS, newJob)
 }
 
 export const fetchAllJobs = (jobType: JobType) => {
