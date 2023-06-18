@@ -34,6 +34,8 @@ app.listen(SERVER_CONFIG.port, async () => {
 
     // If the mongoDB started connect to it
     const dbUri = getServerUri()
+    //TODO: Remove
+    console.log(dbUri);
     await connectToMongoDb(dbUri)
     logInfo('Connected to db')
 
