@@ -1,5 +1,6 @@
 import {NextFunction, Request, Response} from "express";
-import {createDocument} from "../../adaptors/mongoose";
+import {createJob} from "../../services/jobService";
+import {JOB_TYPE} from "../../services/jobService/@constants";
 
 export const getExport = (req: Request, res: Response, next: NextFunction) => {
   //TODO: Add logic
@@ -7,7 +8,6 @@ export const getExport = (req: Request, res: Response, next: NextFunction) => {
 }
 
 export const postExport = async (req: Request, res: Response, next: NextFunction) => {
-  //TODO: Add logic
-  await createDocument('jobs', req.body)
+  await createJob(req.body, JOB_TYPE.EXPORT)
   res.status(200).send('Success')
 }

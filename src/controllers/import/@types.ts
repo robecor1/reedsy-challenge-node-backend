@@ -1,5 +1,7 @@
 export type PostImportBody = {
   bookId: string,
-  type: "word" | "pdf" | "wattpad" | "evernote",
+  type: ImportBodyType,
   url: string
 }
+
+export type ImportBodyType = "word" | "pdf" | "wattpad" | "evernote"

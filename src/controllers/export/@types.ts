@@ -1,4 +1,6 @@
 export type PostExportBody = {
   bookId: string,
-  type: "epub" | "pdf"
+  type: ExportBodyType
 }
+
+export type ExportBodyType = "epub" | "pdf"
