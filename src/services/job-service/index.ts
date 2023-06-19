@@ -27,7 +27,7 @@ export const fetchAllJobs = (jobType: JobType) => {
   return fetchAllDocuments(MONGO_COLLECTIONS.JOBS, {jobType}, {groupField: 'state'})
 }
 
-export const createJobProcess = (job: Job, jobId: string) => {
+const createJobProcess = (job: Job, jobId: string) => {
   const process = new JobProcess({
     jobId,
     jobType: job.jobType,

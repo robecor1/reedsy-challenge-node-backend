@@ -7,9 +7,9 @@ import {JOB_STATE} from "../../services/job-service/@constants";
 
 
 export class JobProcess {
-  jobId: string
-  jobType: string
-  bookType: string
+  private jobId: string
+  private jobType: string
+  private bookType: string
 
   constructor(info: JobInfo) {
     this.jobId = info.jobId
@@ -18,7 +18,7 @@ export class JobProcess {
   }
 
   start() {
-    fakeWait(this.jobType, this.bookType).then(() => {
+    return fakeWait(this.jobType, this.bookType).then(() => {
       return updateDocumentById(MONGO_COLLECTIONS.JOBS, this.jobId, {state: JOB_STATE.FINISHED})
     })
       .then(() => {
