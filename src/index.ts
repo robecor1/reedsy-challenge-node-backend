@@ -22,7 +22,6 @@ app.use('/import', importRoute)
 
 
 app.listen(SERVER_CONFIG.port, async () => {
-  //TODO: Add server start handler
   logInfo("Express for Reedsy assignment started")
 
   // Start the in memory mongoDB
@@ -34,8 +33,6 @@ app.listen(SERVER_CONFIG.port, async () => {
 
     // If the mongoDB started connect to it
     const dbUri = getServerUri()
-    //TODO: Remove
-    console.log(dbUri);
     await connectToMongoDb(dbUri)
     logInfo('Connected to db')
 

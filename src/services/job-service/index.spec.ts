@@ -42,9 +42,9 @@ describe('Job Service', () => {
       type: 'pdf'
     } as PostExportBody & PostImportBody
 
-    const result = await createJob(DATA, JOB_TYPE.EXPORT)
+    const jobId = await createJob(DATA, JOB_TYPE.EXPORT)
 
-    expect(result.acknowledged).toBe(true)
+    expect(jobId).toBeTruthy()
   })
 
   test('Fetch all jobs', async () => {

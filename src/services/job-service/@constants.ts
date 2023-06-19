@@ -7,3 +7,11 @@ export enum JOB_TYPE {
   IMPORT = 'import',
   EXPORT = 'export'
 }
+
+export enum BOOK_TYPE {
+  EPUB = 'epub',
+  PDF = 'pdf',
+  WORD = 'word',
+  WATTPAD = 'wattpad',
+  EVERNOTE = 'evernote',
+}

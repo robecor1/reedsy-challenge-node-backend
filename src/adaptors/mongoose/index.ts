@@ -1,6 +1,5 @@
 import mongoose from 'mongoose';
 import {MONGO_INSTANCE_CONFIGURATION} from "../../config/mongo-server";
-import {logError} from "../../utils/logging";
 import {cleanData} from "./utils";
 import {FindFilter, FindOptions} from "./@types";
 import {CustomError} from "../../utils/error";
@@ -11,7 +10,8 @@ const CONNECTION_MAX_TRIES = 5
 // The interval time in milliseconds to try for a ready connection
 const CONNECTION_TRY_INTERVAL = 1000
 
-let mongoConnection
+// The export is for other unit tests files
+export let mongoConnection
 
 export const connectToMongoDb = async (mongoUri: string) => {
   mongoConnection = await mongoose.createConnection(mongoUri, {dbName: MONGO_INSTANCE_CONFIGURATION.dbName})
@@ -22,6 +22,17 @@ export const createDocument = async (collectionName: string, data: Record<string
   const collection = readyConnection.collection(collectionName)
 
   return await collection.insertOne(cleanData(data))
+}
+
+export const updateDocumentById = async (collectionName: string, documentId: string, data: Record<string, string | number | Date>) => {
+  const readyConnection = await getReadyConnection(0)
+  const collection = readyConnection.collection(collectionName)
+
+  return await collection.updateOne({
+    _id: documentId
+  } , {
+    $set: cleanData(data)
+  })
 }
 
 export const fetchAllDocuments = async (collectionName: string, filter?: FindFilter, options?: FindOptions) => {
