@@ -20,7 +20,7 @@ export const createJob = async (data: PostImportBody & PostExportBody, type: Job
   const result = await createDocument(MONGO_COLLECTIONS.JOBS, newJob)
   createJobProcess(newJob, result.insertedId)
 
-  return result
+  return result.insertedId
 }
 
 export const fetchAllJobs = (jobType: JobType) => {
