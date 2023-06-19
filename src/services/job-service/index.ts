@@ -2,9 +2,9 @@ import {PostImportBody} from "../../controllers/import/@types";
 import {PostExportBody} from "../../controllers/export/@types";
 import {Job, JobType} from "./@types";
 import {JOB_STATE} from "./@constants";
-import {createDocument, fetchAllDocuments, updateDocumentById} from "../../adaptors/mongoose";
+import {createDocument, fetchAllDocuments} from "../../adaptors/mongoose";
 import {MONGO_COLLECTIONS} from "../../enums/mongo";
-import {fakeWait} from "../fake-processing";
+import {JobProcess} from "../../modules/job-process";
 
 
 export const createJob = async (data: PostImportBody & PostExportBody, type: JobType) => {
@@ -18,15 +18,22 @@ export const createJob = async (data: PostImportBody & PostExportBody, type: Job
   }
 
   const result = await createDocument(MONGO_COLLECTIONS.JOBS, newJob)
-  return await processJob(newJob, result.insertedId)
+  createJobProcess(newJob, result.insertedId)
+
+  return result
 }
 
 export const fetchAllJobs = (jobType: JobType) => {
   return fetchAllDocuments(MONGO_COLLECTIONS.JOBS, {jobType}, {groupField: 'state'})
 }
 
-export const processJob = async (job: Job, jobId: string) => {
-  await fakeWait(job.jobType, job.type)
-  return await updateDocumentById(MONGO_COLLECTIONS.JOBS, jobId, {state: JOB_STATE.FINISHED})
+export const createJobProcess = (job: Job, jobId: string) => {
+  const process = new JobProcess({
+    jobId,
+    jobType: job.jobType,
+    bookType: job.type
+  })
+
+  process.start()
 }
 
