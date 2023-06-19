@@ -24,6 +24,17 @@ export const createDocument = async (collectionName: string, data: Record<string
   return await collection.insertOne(cleanData(data))
 }
 
+export const updateDocumentById = async (collectionName: string, documentId: string, data: Record<string, string | number | Date>) => {
+  const readyConnection = await getReadyConnection(0)
+  const collection = readyConnection.collection(collectionName)
+
+  return await collection.updateOne({
+    _id: documentId
+  } , {
+    $set: cleanData(data)
+  })
+}
+
 export const fetchAllDocuments = async (collectionName: string, filter?: FindFilter, options?: FindOptions) => {
   const readyConnection = await getReadyConnection(0)
   const collection = readyConnection.collection(collectionName)

@@ -1,6 +1,6 @@
 import {NextFunction, Request, Response} from "express";
-import {createJob, fetchAllJobs} from "../../services/jobService";
-import {JOB_TYPE} from "../../services/jobService/@constants";
+import {createJob, fetchAllJobs} from "../../services/job-service";
+import {JOB_TYPE} from "../../services/job-service/@constants";
 import {ERROR_MESSAGE} from "../../enums/errors";
 
 export const getImport = async (req: Request, res: Response, next: NextFunction) => {
