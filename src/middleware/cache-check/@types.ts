@@ -1,4 +1,4 @@
 export type JobCache = {
-  import?: Array<any>
-  export?: Array<any>
+  import?: Record<string, Array<any>>
+  export?: Record<string, Array<any>>
 }
