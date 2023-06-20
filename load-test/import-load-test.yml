@@ -3,10 +3,12 @@ config:
   phases:
     - name: "Warm phase"
       duration: 10
-      arrivalRate: 100
+      arrivalRate: 1
+      rampTo: 100
     - name: "Hard phase"
       duration: 10
-      arrivalRate: 1000
+      arrivalRate: 100
+      rampTo: 1000
 scenarios:
   - name: Export
     flow:
