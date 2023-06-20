@@ -6,6 +6,7 @@ import {createDocument, fetchDocuments} from "../../adaptors/mongoose";
 import {MONGO_COLLECTIONS} from "../../enums/mongo";
 import {JobProcess} from "../../modules/job-process";
 import {groupBy} from "./utils";
+import {FindOptions} from "../../adaptors/mongoose/@types";
 
 
 export const createJob = async (data: PostImportBody & PostExportBody, type: JobType) => {
@@ -24,8 +25,8 @@ export const createJob = async (data: PostImportBody & PostExportBody, type: Job
   return result.insertedId
 }
 
-export const fetchJobs = async (jobType: JobType) => {
-  const jobs = await fetchDocuments(MONGO_COLLECTIONS.JOBS, {jobType})
+export const fetchJobs = async (jobType: JobType, options?: FindOptions) => {
+  const jobs = await fetchDocuments(MONGO_COLLECTIONS.JOBS, {jobType}, options)
   return groupBy(jobs, 'state')
 }
 

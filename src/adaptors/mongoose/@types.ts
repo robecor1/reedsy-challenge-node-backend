@@ -1,4 +1,5 @@
 export type FindFilter = Record<string, string | number>
 export type FindOptions = {
-  groupField?: string
+  skip?: number
+  limit?: number
 }

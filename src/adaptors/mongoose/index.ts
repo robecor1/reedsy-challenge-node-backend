@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import {MONGO_INSTANCE_CONFIGURATION} from "../../config/mongo-server";
 import {cleanData} from "./utils";
-import {FindFilter} from "./@types";
+import {FindFilter, FindOptions} from "./@types";
 import {CustomError} from "../../utils/error";
 import {ERROR_MESSAGE} from "../../enums/errors";
 import {MONGO_COLLECTIONS} from "../../enums/mongo";
@@ -44,11 +44,20 @@ export const updateDocumentById = async (collectionName: string, documentId: str
   })
 }
 
-export const fetchDocuments = async (collectionName: string, filter?: FindFilter) => {
+export const fetchDocuments = async (collectionName: string, filter?: FindFilter, options?: FindOptions) => {
   const readyConnection = await getReadyConnection(0)
   const collection = readyConnection.collection(collectionName)
 
-  return await collection.find(filter).toArray()
+  const cursor = await collection.find(filter)
+
+  if (options?.skip) {
+    cursor.skip(options.skip)
+  }
+  if (options?.limit) {
+    cursor.limit(options.limit)
+  }
+
+  return cursor.toArray()
 }
 
 export const clearCollection = async (collectionName: string) => {
