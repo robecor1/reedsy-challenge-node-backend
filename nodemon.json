@@ -1,0 +1,9 @@
+{
+  "verbose": true,
+  "ignore": ["*.spec.js", "./node_modules/*"],
+  "ext": "ts",
+  "delay": 3,
+  "execMap": {
+    "ts": "ts-node"
+  }
+}
