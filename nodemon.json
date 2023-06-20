@@ -1,6 +1,7 @@
 {
   "verbose": true,
-  "ignore": ["*.spec.js", "./node_modules/*"],
+  "watch": ["./src"],
+  "ignore": ["*.spec.js"],
   "ext": "ts",
   "delay": 3,
   "execMap": {
