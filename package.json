@@ -4,11 +4,11 @@
   "description": "Implement a REST API using Express.js that handles Export and Import requests",
   "main": "index.js",
   "scripts": {
-    "start": "npx tsc && nodemon build/index.ts",
+    "start": "npx tsc && nodemon src/index.ts",
     "start:debug": "npx tsc && nodemon --trace_gc --inspect build/index.js",
     "test": "jest",
-    "load:test:export": "npx artillery run load-test/export-load-test.yml",
-    "load:test:import": "npx artillery run load-test/import-load-test.yml"
+    "load-test:post": "npx artillery run load-test/post-load-fetch.yml",
+    "load-test:get": "npx artillery run load-test/get-load-fetch.yml"
   },
   "repository": {
     "type": "git",

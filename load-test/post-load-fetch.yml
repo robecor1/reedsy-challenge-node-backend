@@ -1,0 +1,22 @@
+config:
+  target: "http://localhost:3000"
+  phases:
+    - name: "GET Load test"
+      duration: 60
+      arrivalRate: 100
+scenarios:
+  - name: Post exports
+    flow:
+      - post:
+          url: "/export"
+          json:
+            bookId: "1"
+            type: "epub"
+  - name: Post imports
+    flow:
+      - post:
+          url: "/import"
+          json:
+            bookId: "1"
+            type: "pdf"
+            url: "https://www.google.com"

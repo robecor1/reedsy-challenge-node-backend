@@ -21,6 +21,7 @@ export const fakeWait = (jobType: string, bookType: string) => {
       // Clear timeout to avoid memory leaks
       // Even tho it's usually cleaned by the GC
       clearTimeout(timeoutId)
+      resolve()
     }, waitTime)
   })
 }
