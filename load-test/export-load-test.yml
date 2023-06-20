@@ -1,0 +1,19 @@
+config:
+  target: "http://localhost:3000"
+  phases:
+    - name: "Warm phase"
+      duration: 10
+      arrivalRate: 100
+    - name: "Hard phase"
+      duration: 10
+      arrivalRate: 1000
+scenarios:
+  - name: Export
+    flow:
+      - post:
+          url: "/export"
+          json:
+            bookId: "1"
+            type: "epub"
+      - get:
+          url: "/export"
