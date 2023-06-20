@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npx tsc && nodemon build/index.js",
+    "start:debug": "npx tsc && nodemon --trace_gc --inspect build/index.js",
     "test": "jest",
     "load:test:export": "npx artillery run load-test/export-load-test.yml",
     "load:test:import": "npx artillery run load-test/import-load-test.yml"

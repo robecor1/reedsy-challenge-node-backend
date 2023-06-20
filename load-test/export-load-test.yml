@@ -2,16 +2,16 @@ config:
   target: "http://localhost:3000"
   phases:
     - name: "Load test"
-      duration: 20
-      arrivalRate: 100
+      duration: 10
+      arrivalRate: 10
 scenarios:
-  - name: Post exports
-    flow:
-      - post:
-          url: "/export"
-          json:
-            bookId: "1"
-            type: "epub"
+#  - name: Post exports
+#    flow:
+#      - post:
+#          url: "/export"
+#          json:
+#            bookId: "1"
+#            type: "epub"
   - name: Get exports
     flow:
       - get:

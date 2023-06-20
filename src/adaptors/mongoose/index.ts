@@ -4,6 +4,7 @@ import {cleanData} from "./utils";
 import {FindFilter, FindOptions} from "./@types";
 import {CustomError} from "../../utils/error";
 import {ERROR_MESSAGE} from "../../enums/errors";
+import {MONGO_COLLECTIONS} from "../../enums/mongo";
 
 // The maximum number of times to try for a ready connection
 const CONNECTION_MAX_TRIES = 5
@@ -15,6 +16,14 @@ export let mongoConnection
 
 export const connectToMongoDb = async (mongoUri: string) => {
   mongoConnection = await mongoose.createConnection(mongoUri, {dbName: MONGO_INSTANCE_CONFIGURATION.dbName})
+
+  // If there is a jobs collection add a jobType index for faster query
+  const readyConnection = await getReadyConnection(0)
+  const collection = readyConnection.collection(MONGO_COLLECTIONS.JOBS)
+
+  if (collection) {
+    await collection.createIndex({ jobType: 1 });
+  }
 }
 
 export const createDocument = async (collectionName: string, data: Record<string, string | number | Date>) => {
