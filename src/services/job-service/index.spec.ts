@@ -57,6 +57,6 @@ describe('Job Service', () => {
     const jobsArray = await fetchJobs(JOB_TYPE.EXPORT)
 
     expect(jobsArray["pending"].length).toBe(1)
-    expect(jobsArray[0].bookId).toBe(DATA.bookId)
+    expect(jobsArray["pending"][0].bookId).toBe(DATA.bookId)
   })
 })
