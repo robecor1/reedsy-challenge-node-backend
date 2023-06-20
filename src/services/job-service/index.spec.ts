@@ -1,7 +1,7 @@
 import {stopServer, getServerUri, startMongoServer} from "../../adaptors/memory-mongo";
 import {logError} from "../../utils/logging";
 import {clearCollection, closeConnection, connectToMongoDb} from "../../adaptors/mongoose";
-import {createJob, fetchAllJobs} from "./index";
+import {createJob, fetchJobs} from "./index";
 import {JOB_TYPE} from "./@constants";
 import {PostExportBody} from "../../controllers/export/@types";
 import {PostImportBody} from "../../controllers/import/@types";
@@ -54,9 +54,9 @@ describe('Job Service', () => {
     } as PostExportBody & PostImportBody
 
     await createJob(DATA, JOB_TYPE.EXPORT)
-    const jobsArray = await fetchAllJobs(JOB_TYPE.EXPORT)
+    const jobsArray = await fetchJobs(JOB_TYPE.EXPORT)
 
-    expect(jobsArray.length).toBe(1)
-    expect(jobsArray[0].bookId).toBe(DATA.bookId)
+    expect(jobsArray["pending"].length).toBe(1)
+    expect(jobsArray["pending"][0].bookId).toBe(DATA.bookId)
   })
 })
