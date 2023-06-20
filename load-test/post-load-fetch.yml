@@ -3,7 +3,7 @@ config:
   phases:
     - name: "GET Load test"
       duration: 60
-      arrivalRate: 100
+      arrivalRate: 1000
 scenarios:
   - name: Post exports
     flow:

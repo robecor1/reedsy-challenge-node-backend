@@ -2,14 +2,20 @@ config:
   target: "http://localhost:3000"
   phases:
     - name: "POST Load test"
-      duration: 10
-      arrivalRate: 100
+      duration: 60
+      arrivalRate: 1000
 scenarios:
   - name: Get exports
     flow:
       - get:
           url: "/export"
+          qs:
+            skip: 0
+            limit: 50
   - name: Get imports
     flow:
       - get:
           url: "/import"
+          qs:
+            skip: 0
+            limit: 50
