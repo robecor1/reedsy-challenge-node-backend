@@ -3,7 +3,7 @@ import {JobCache} from "./@types";
 import {convertOptionsToHashKey} from "../../utils/format";
 
 // This is going to be our cache file
-// Of course the best practice is going to be using Redis, but I already used MongoDB for DB instead of just using the memory and I fear that using Redis is going to take too much time
+// Of course the best practice is going to be using Redis
 export const jobCache: JobCache = {}
 
 export const checkJobsCache = async (req: Request, res: Response, next: NextFunction) => {
