@@ -2,7 +2,7 @@ config:
   target: "http://localhost:3000"
   phases:
     - name: "Load test"
-      duration: 20
+      duration: 10
       arrivalRate: 100
 scenarios:
   - name: Post imports
@@ -11,7 +11,8 @@ scenarios:
           url: "/import"
           json:
             bookId: "1"
-            type: "epub"
+            type: "pdf"
+            url: "https://www.google.com"
   - name: Get imports
     flow:
       - get:
