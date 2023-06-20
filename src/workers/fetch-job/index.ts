@@ -1,3 +1,0 @@
-import {worker} from 'workerpool'
-
-

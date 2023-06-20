@@ -7,7 +7,11 @@
     "sourceMap": true,
     "outDir": "build",
     "types": ["jest", "node", "express"],
-    "alwaysStrict": true
+    "alwaysStrict": true,
+    "baseUrl": "./src",
+    "paths": {
+      "*": ["*", "*/index.js"]
+    }
   },
   "exclude": [
     "seed"
