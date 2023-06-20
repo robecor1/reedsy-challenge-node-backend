@@ -17,8 +17,10 @@ export const fakeWait = (jobType: string, bookType: string) => {
   const waitTime = jobType === JOB_TYPE.IMPORT ? WAIT_TIMES[jobType] : WAIT_TIMES[jobType][bookType] || 0
 
   return new Promise<void>((resolve) => {
-    setTimeout(() => {
-      resolve()
+    const timeoutId = setTimeout(() => {
+      // Clear timeout to avoid memory leaks
+      // Even tho it's usually cleaned by the GC
+      clearTimeout(timeoutId)
     }, waitTime)
   })
 }

@@ -1,22 +1,18 @@
 config:
   target: "http://localhost:3000"
   phases:
-    - name: "Warm phase"
-      duration: 10
-      arrivalRate: 1
-      rampTo: 100
-    - name: "Hard phase"
-      duration: 10
+    - name: "Load test"
+      duration: 20
       arrivalRate: 100
-      rampTo: 1000
 scenarios:
-  - name: Export
+  - name: Post imports
     flow:
       - post:
           url: "/import"
           json:
             bookId: "1"
             type: "epub"
-            url: "https://www.google.com"
+  - name: Get imports
+    flow:
       - get:
           url: "/import"
