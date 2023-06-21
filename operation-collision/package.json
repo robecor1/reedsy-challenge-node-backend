@@ -4,6 +4,7 @@
   "description": "Operation collision implementation",
   "main": "index.js",
   "scripts": {
+    "start": "npx tsc && node build/index.js",
     "test": "test"
   },
   "repository": {
