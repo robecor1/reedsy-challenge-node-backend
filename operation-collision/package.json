@@ -1,0 +1,19 @@
+{
+  "name": "operation-collision",
+  "version": "1.0.0",
+  "description": "Operation collision implementation",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/robecor1/reedsy-challenge-node-backend.git"
+  },
+  "author": "robert.corolea@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/robecor1/reedsy-challenge-node-backend/issues"
+  },
+  "homepage": "https://github.com/robecor1/reedsy-challenge-node-backend#readme"
+}
