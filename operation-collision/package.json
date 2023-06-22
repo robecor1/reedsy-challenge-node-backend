@@ -1,0 +1,26 @@
+{
+  "name": "operation-collision",
+  "version": "1.0.0",
+  "description": "Operation collision implementation",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx tsc && node build/index.js",
+    "test": "jest",
+    "test:coverage": "jest --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/robecor1/reedsy-challenge-node-backend.git"
+  },
+  "author": "robert.corolea@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/robecor1/reedsy-challenge-node-backend/issues"
+  },
+  "homepage": "https://github.com/robecor1/reedsy-challenge-node-backend#readme",
+  "devDependencies": {
+    "@types/jest": "^29.5.2",
+    "ts-jest": "^29.1.0",
+    "typescript": "^5.1.3"
+  }
+}

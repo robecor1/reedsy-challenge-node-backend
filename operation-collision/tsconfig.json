@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "target": "es6",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "outDir": "build",
+    "types": ["jest", "node"],
+    "alwaysStrict": true,
+    "baseUrl": "./src",
+    "paths": {
+      "*": ["*", "*/index.js"]
+    }
+  },
+  "exclude": [
+    "seed"
+  ],
+  "lib": ["es2015"]
+}
