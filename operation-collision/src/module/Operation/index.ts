@@ -1,4 +1,4 @@
-import {OperationEditQueue} from "./@types";
+import {OperationDelete, OperationEditQueue} from "./@types";
 
 
 export class Operation {
@@ -76,11 +76,20 @@ export class Operation {
       }
 
       if ('insert' in editItem) {
+
         if (!insertDelta[lefIndex]) {
           insertDelta[lefIndex] = 0
         }
 
         insertDelta[lefIndex] += editItem['insert']?.length
+      }
+
+      if ('delete' in editItem) {
+        if (!insertDelta[lefIndex]) {
+          insertDelta[lefIndex] = 0
+        }
+
+        insertDelta[lefIndex] -= editItem['delete']
       }
     }
 
@@ -111,10 +120,15 @@ export class Operation {
         }
 
       } else {
-        if (editItem === firstItem) {
-          resultEditList = [...resultEditList, {skip: -skipDelta}, editItem]
+        if ('delete' in editItem) {
+          const splitDelete = this.splitDeleteEdit(editItem, insertDelta, skipDelta, lefIndex)
+          resultEditList = [...resultEditList, ...splitDelete]
         } else {
-          resultEditList = [...resultEditList, editItem]
+          if (editItem === firstItem) {
+            resultEditList = [...resultEditList, {skip: -skipDelta}, editItem]
+          } else {
+            resultEditList = [...resultEditList, editItem]
+          }
         }
       }
     }
@@ -133,5 +147,45 @@ export class Operation {
     }
 
     return newSkipDelta
+  }
+
+  // This method is used to split a delete command into multiple ones so that it doesn't remove text from the previous operation
+  // The way it works is that it checks for indexes in insertDela object that collide with the delete command and split it into multiple pairs
+  // of <skip/delete> commands that hop over the added text from the previous operation
+  private static splitDeleteEdit(editItem: OperationDelete, insertDelta: Record<string, number>, skipDelta: number, lefIndex: number) {
+    let resultEditList: OperationEditQueue = []
+    const addDeltaKeys = Object.keys(insertDelta).map(key => Number(key)).sort((key1, key2) => key1 - key2)
+    const affectedKeys = addDeltaKeys.filter(key => (key >= lefIndex && key <= lefIndex + editItem['delete']))
+    let currentDeleteIndex = 0
+    let deletedCount = 0
+    let newDeleteList = []
+
+    if (!affectedKeys.length) {
+      return [editItem]
+    }
+
+    for (const key of affectedKeys) {
+      const newDeleteSkip = currentDeleteIndex
+      const newDeleteValue = key - lefIndex
+
+      if (newDeleteSkip !== 0) {
+        newDeleteList = [...newDeleteList, {skip: newDeleteSkip}]
+      }
+      if (newDeleteValue !== 0) {
+        newDeleteList = [...newDeleteList, {delete: newDeleteValue}]
+      }
+
+      currentDeleteIndex += insertDelta[key.toString()]
+      deletedCount = +key - lefIndex
+    }
+
+    resultEditList = [...resultEditList, ...newDeleteList]
+
+    if (deletedCount < editItem['delete']) {
+      const lastDelta = insertDelta[(addDeltaKeys[addDeltaKeys.length - 1]).toString()]
+      resultEditList = [...resultEditList, {skip: lastDelta}, {delete: editItem['delete'] - deletedCount}]
+    }
+
+    return resultEditList
   }
 }
