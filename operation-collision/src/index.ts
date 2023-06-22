@@ -1,8 +1,9 @@
+// I used this file to test the implementation
+// You can treat this as a playground for interacting with the class and its instances
+
 import {Operation} from "./module/Operation";
 
 const s = "1234567";
-console.log(s);
-console.log('\n')
 
 const op1 = new Operation([
   {skip: 1}, {insert: "(A1)"},

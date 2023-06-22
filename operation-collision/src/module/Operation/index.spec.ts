@@ -133,7 +133,7 @@ describe('Operation module', () => {
 
     const comb1 = Operation.combine(op1, op2)
     const comb2 = Operation.combine(op2, op1)
-    
+
     expect(comb1.apply(TEST_STRING)).toEqual(EXPECTED_OUTCOME1)
     expect(comb1.apply(TEST_STRING)).not.toEqual(comb2.apply(TEST_STRING))
     expect(comb2.apply(TEST_STRING)).toEqual(EXPECTED_OUTCOME2)
