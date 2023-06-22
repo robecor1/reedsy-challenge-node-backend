@@ -10,12 +10,14 @@ export class Operation {
 
   combine(operation: Operation) {
     // Assumption here is made that the operation from the second item go after the first one
+    // and any operation can be combined with itself
     this.editList = Operation.combineOperationsEditList(this.editList, operation.editList)
     return this
   }
 
   static combine(operation1: Operation, operation2: Operation) {
     // Assumption here is made that the operation from the second item go after the first one
+    // and any operation can be combined with itself
     const combinedEdit = this.combineOperationsEditList(operation1.editList, operation2.editList)
     return new Operation(combinedEdit)
   }
@@ -43,6 +45,7 @@ export class Operation {
     return resultText
   }
 
+  // Static method to combine two edit lists from two operations and return a new list
   private static combineOperationsEditList(editList1: OperationEditQueue, editList2: OperationEditQueue) {
     let resultEditList: OperationEditQueue = [...editList1]
 
