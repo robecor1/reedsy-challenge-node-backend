@@ -51,8 +51,8 @@ Continuing from the previous section we need a way to mitigate the slow speed of
 Some solutions that would help mitigate are:
 
 #### 1. Snapshots
-This method proposes the every n-th version we store in the CDN current version of the novel as a file. This way when we want to reconstruct a version we just need to apply the version deltas to the most recent snapshot relative to the version you want to view.
-Of course this again comes at the cost of some disk space as we again store some files, but it all depends on how we configure that n-number.
+This method proposes that every n-th version we store in db, we also store in the CDN current novel as a file. This way when we want to reconstruct a version we just need to apply the version deltas to the most recent snapshot relative to the version you want to view.
+Of course this again comes at the cost of some disk space as we store some more files, but it all depends on how we configure that n-number.
 
 #### 2. Reverse chain
 We need to consider that in the real world the most recent versions are fetched the most. It doesn't really make sense for a user to view the first iterations of a novel, as opposed to new versions.
@@ -106,6 +106,8 @@ where:
 - `insert` adds a substring to that index
 - `delete` removes a number of character starting from the index
 
+Showing differences between versions is just a mater of showing the list of edits in the `delta` field of a version, to compare what changed from the previous one.
+
 For the snapshots we have 2 options:
 
 1. Add on optional field to the versions table `snapshotUrl` the points to the snapshot URI created for that version
@@ -117,4 +119,9 @@ For the snapshots we have 2 options:
 - url: absolute uri to the CDN for the snapshot
 ````
 
-Option 1 is more efficient in disk space since we don't create another table just for snapshots and we can extract the information from the version itself, but option 2 offer more data integrity since the logic can be decoupled from the versioning logic.
+Option 1 is more efficient in disk space since we don't create another table just for snapshots, and we can extract the information from the version itself, but option 2 offer more data integrity since the logic can be decoupled from the versioning logic.
+
+### 6. Closing thoughts
+
+In the end we have the possibility of fetching the most current novel file from CDN as well as viewing past version and comparing them if needed using the `versions` table as well as the list of edits each one contains.
+Snapshots help reduce the processing speed of versions and the scale of the trade-off greatly depends on the frequency they are being created on.
